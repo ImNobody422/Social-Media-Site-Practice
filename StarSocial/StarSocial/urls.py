@@ -17,12 +17,16 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+"""
+Don't forget to check whether this can work without the other accounts/ url
+This is for some urls provided by auth app, like "accounts/profile"
+Can be avoided by re-define Login or Logout redirection url to other pages
+"""
 urlpatterns = [
     path('', views.HomePage.as_view(), name='home'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
-    # Don't forget to check whether this can work without the following line
-    # This is for some urls provided by auth app, like "accounts/profile"
-    # Can be avoided by re-define redirection url to other pages
     # path('accounts/', include("django.contrib.auth.urls")),
+    path('test/', views.TestPage.as_view(), name='test'),
+    path('thanks/', views.ThanksPage.as_view(), name='thanks'),
     path('admin/', admin.site.urls),
 ]
