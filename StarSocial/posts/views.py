@@ -6,6 +6,7 @@ from django.http import Http404
 from braces.views import SelectRelatedMixin
 from django.contrib import messages
 from .models import Post
+from groups.models import Group
 from . import forms
 from django.contrib.auth import get_user_model
 # Create your views here.
@@ -14,7 +15,14 @@ User = get_user_model()
 
 class PostList(SelectRelatedMixin, ListView):
     model = Post
+    template_name = 'posts/post_list.html'
     select_related = ('user', 'group')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_groups'] = Group.objects.filter(members__in=[self.request.user.pk])
+        context['all_groups'] = Group.objects.all()
+        return context
 
 class UserPosts(ListView):
     model = Post
