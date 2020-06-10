@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" href="{% static 'StarSocial/css/master.css' %}">
 
+    <script src="https://kit.fontawesome.com/c3dd42db7c.js" crossorigin="anonymous"></script>
+
   </head>
   <body>
 
@@ -20,12 +22,12 @@
         <a class="navbar-brand mynav" href="{% url 'home' %}">Star Social</a>
         <ul class="nav navbar-nav ml-auto">
           {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link" href="#">Post</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Create Group</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'posts:create' %}">Post</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'groups:all' %}">Groups</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'groups:create' %}">Create Group</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}">Log Out</a></li>
           {% else %}
-            <li class="nav-item"><a class="nav-link" href="#">Groups</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'groups:all' %}">Groups</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">Log In</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'accounts:signup' %}">Sign Up</a></li>
           {% endif %}
@@ -37,10 +39,12 @@
       {% block content %}
       {% endblock %}
     </div>
+    <canvas id="canvas"></canvas>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
   </body>
+  <script type="text/javascript" src="{% static 'StarSocial/js/master.js' %}"></script>
 </html>
